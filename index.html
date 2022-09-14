@@ -10,40 +10,52 @@
 </head>
 
 <body>
-    <img class = 'logo' src="/Image/cyc.png"/>
+    <img class='logo' src="/Image/cyc.png" />
 
+    <img class="lights-out"
+        src="https://64.media.tumblr.com/4e27c3c9dd804c8fd730b5a8686b5216/tumblr_o76fpgmQFQ1qeyvpto1_500.gif" hidden />
+
+    <img class='mario-gif' src='https://c.tenor.com/YaTahtedGloAAAAM/mario-pipe.gif' />
+
+    <!-- Switch Light -->
     <label class="switch">
         <input type="checkbox">
         <span class="slider round"></span>
     </label>
+    <!-- Character Cards -->
     <div class="cards">
-        <!-- <div class="card">
-            <div class="circle">
-                <img class='img' src="https://raw.githubusercontent.com/N3evin/AmiiboAPI/master/images/icon_00000000-00000002.png" />
-            </div>
-        </div>
-        <div class="card">
-            <div class="circle">
-                <img class="img" src="https://raw.githubusercontent.com/N3evin/AmiiboAPI/master/images/icon_00010000-00350102.png" />
-            </div> -->
-        </div>
     </div>
 
     <hr class="dotted">
 
-    <section class="container">
+    <section class="container" hidden>
         <div id="display-information">
-            <label id="name-series">Game series: </label>
+            <label id="name-series" hidden>Game series: </label>
             <br>
             <br>
-            <label id="character-name">Name: Mario</label>
+            <label id="character-name" hidden>Name:</label>
 
         </div>
+
         <div id="imagee">
-            <img id="image"
-                src="https://raw.githubusercontent.com/N3evin/AmiiboAPI/master/images/icon_00000000-00000002.png" />
+            <img id="image" hidden />
+            <img class="mario-gif2" src="https://www.icegif.com/wp-content/uploads/2022/03/icegif-483.gif" />
         </div>
     </section>
+
+    <hr class="dotted2" hidden>
+
+    <form id="Add-Character">
+        <label for="name">Name: </label>
+        <input type="text" placeholder="Enter Name" id="Name" name="name" />
+        <label for="Game">Game: </label>
+        <input type="text" placeholder='Enter Game' name="Game" id="Game-designation" />
+        <label for="image">Image: </label>
+        <input type="text" placeholder='URL' name="image" id="new-image" />
+        <label for="new-bio">Bio: </label>
+        <textarea name="new-bio" id="new-bio"></textarea>
+        <input type="submit" value="Create" />
+    </form>
     <script src="/index.js"></script>
 </body>
 

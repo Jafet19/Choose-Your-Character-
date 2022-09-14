@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario Cart</title>
+    <link rel="stylesheet" href="/index.css" />
+</head>
+
+<body>
+    <img class='logo' src="/Image/cyc.png" />
+
+    <img class="lights-out"
+        src="https://64.media.tumblr.com/4e27c3c9dd804c8fd730b5a8686b5216/tumblr_o76fpgmQFQ1qeyvpto1_500.gif" hidden />
+
+    <img class='mario-gif' src='https://c.tenor.com/YaTahtedGloAAAAM/mario-pipe.gif' />
+
+    <!-- Switch Light -->
+    <label class="switch">
+        <input type="checkbox">
+        <span class="slider round"></span>
+    </label>
+    <!-- Character Cards -->
+    <div class="cards">
+    </div>
+
+    <hr class="dotted">
+
+    <section class="container" hidden>
+        <div id="display-information">
+            <label id="name-series" hidden>Game series: </label>
+            <br>
+            <br>
+            <label id="character-name" hidden>Name:</label>
+
+        </div>
+
+        <div id="imagee">
+            <img id="image" hidden />
+            <img class="mario-gif2" src="https://www.icegif.com/wp-content/uploads/2022/03/icegif-483.gif" />
+        </div>
+    </section>
+
+    <hr class="dotted2" hidden>
+
+    <form id="Add-Character">
+        <label for="name">Name: </label>
+        <input type="text" placeholder="Enter Name" id="Name" name="name" />
+        <label for="Game">Game: </label>
+        <input type="text" placeholder='Enter Game' name="Game" id="Game-designation" />
+        <label for="image">Image: </label>
+        <input type="text" placeholder='URL' name="image" id="new-image" />
+        <label for="new-bio">Bio: </label>
+        <textarea name="new-bio" id="new-bio"></textarea>
+        <input type="submit" value="Create" />
+    </form>
+    <script src="/index.js"></script>
+</body>
+
+</html>

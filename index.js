@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     //The listOfCharactersReduced array is going to store the characters
     //from the listofcharacters.
     const listOfCharactersReduced = [];
+    //To add the new character from the form.
+    const listOfCharactersNew = [];
 
     //The fetch will get the characters of super smash bros from the API and
     //push the charavters to the listOfCharacters.
@@ -13,9 +15,22 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => data.amiibo.forEach(element => {
             listOfCharacters.push({
                 gameSeries: element.gameSeries,
-                character: element.character,
                 image: element.image,
                 name: element.name
+            });
+        }));
+
+
+    //Here we will GET the new character created and append it into
+    // a new array.
+    fetch('http://localhost:3000/character')
+        .then(response => response.json())
+        .then(characters => characters.forEach(character => {
+
+            listOfCharactersNew.push({
+                gameSeries: character.gameSeries,
+                image: character.image,
+                name: character.name
             });
         }));
 
@@ -31,6 +46,10 @@ document.addEventListener("DOMContentLoaded", () => {
             listOfCharactersReduced.push(listOfCharacters[i]);
         }
 
+        //Here we add the new character from the form into the
+        // end of the array.
+        listOfCharactersReduced.push(listOfCharactersNew[0]);
+
         //Here we are going to iterate on each of the objects in the array
         //and display it on the website.
         listOfCharactersReduced.forEach(character => {
@@ -39,18 +58,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const img = document.createElement('img');
             card.className = 'card';
             circle.className = 'circle';
-            img.name = character.name
+            img.name = character.name;
             img.src = character.image;
             img.className = 'img';
             circle.appendChild(img);
             card.appendChild(circle);
             cards.append(card);
 
-        })
+        });
 
         //Here we are adding a Gif and wait 1 second so that i can be add at the end of the cards.
         setTimeout(() => {
-            const addCharacterForm = document.getElementById('Add-Character');
+            const addCharacterForm = document.getElementById('#submit-button');
             const card = document.createElement('div');
             const circle = document.createElement('div');
             const addGif = document.createElement('img');
@@ -67,45 +86,35 @@ document.addEventListener("DOMContentLoaded", () => {
             addGif.addEventListener('click', () => {
                 const dotted2 = document.querySelector('.dotted2');
                 dotted2.hidden = true;
-                addCharacterForm.hidden = false;
+                // addCharacterForm.hidden = false;
             });
 
             //Here goes the code to add new Character
-            addCharacterForm.addEventListener('submit', (e) => {
-                e.preventDefault()
+            addCharacterForm.addEventListener('click', (e) => {
+                e.preventDefault();
 
-
-                const data = {
-                    image: e.target.name.value,
-                    name: e.target.image.value
+                if (addCharacterForm.not(".checked")) {
+                    addCharacterForm.addClass("checked");
+                    setTimeout(function () {
+                        addCharacterForm.removeClass("checked");
+                    }, 8000);
                 }
-                //fetch
 
+
+                //fetch
                 fetch('http://localhost:3000/character', {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
                         Accept: 'application/json'
                     },
-                    body: JSON.stringify(data),
-                })
-                    .then(response => response.json())
-                    .then(characters => characters.forEach(character => {
-                        const card = document.createElement('div');
-                        const circle = document.createElement('div');
-                        const img = document.createElement('img');
-                        card.className = 'card';
-                        circle.className = 'circle';
-                        img.name = character.name;
-                        img.src = character.image;
-                        img.className = 'img';
-                        circle.appendChild(img);
-                        card.appendChild(circle);
-                        cards.append(card);
-                        addCharacterForm.hidden = true;
-                    }))
-
-            })
+                    body: JSON.stringify({
+                        gameSeries: e.target.gameSeries.value,
+                        image: e.target.image.value,
+                        name: e.target.name.value
+                    }),
+                });
+            });
 
         }, 1000);
 
@@ -114,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //We are also hidding the characters bio and image from the
 
         const circle = document.querySelectorAll('.circle');
-        const nameSeries = document.getElementById('name-series');
+        const nameSeries = document.getElementById('game-series');
         const characterName = document.getElementById('character-name');
         const characterImage = document.getElementById('image');
         const box = document.querySelector('.container');
@@ -131,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 for (let i = 0; i < listOfCharactersReduced.length; i++) {
                     if (listOfCharactersReduced[i].name === e.target.name) {
                         nameSeries.textContent = `Name Series: ${listOfCharactersReduced[i].gameSeries}`;
-                        characterName.textContent = `Character's Name: ${listOfCharactersReduced[i].character}`;
+                        characterName.textContent = `Character's Name: ${listOfCharactersReduced[i].name}`;
                         characterImage.src = listOfCharactersReduced[i].image;
                     }
                 }
@@ -141,13 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 2000);
 
 
-
-
-
     //switch button to turn the background dark
-
     const toggle = document.querySelector('.switch [type="checkbox"]');
-
 
     toggle.addEventListener('click', () => {
         const box = document.querySelector('.container');
@@ -176,8 +180,6 @@ document.addEventListener("DOMContentLoaded", () => {
             lightsOut.hidden = true;
 
         }
-
-
     });
 
 

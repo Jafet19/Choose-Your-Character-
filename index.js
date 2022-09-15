@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //Here we are adding a Gif and wait 1 second so that i can be add at the end of the cards.
         setTimeout(() => {
+            const addCharacterForm = document.getElementById('Add-Character');
             const card = document.createElement('div');
             const circle = document.createElement('div');
             const addGif = document.createElement('img');
@@ -64,13 +65,47 @@ document.addEventListener("DOMContentLoaded", () => {
             cards.append(card);
 
             addGif.addEventListener('click', () => {
-                const addCharacterForm = document.getElementById('Add-Character');
                 const dotted2 = document.querySelector('.dotted2');
                 dotted2.hidden = true;
                 addCharacterForm.hidden = false;
-                //Here goes the code to add new Character
-                console.log('I was clicked');
             });
+
+            //Here goes the code to add new Character
+            addCharacterForm.addEventListener('submit', (e) => {
+                e.preventDefault()
+
+
+                const data = {
+                    image: e.target.name.value,
+                    name: e.target.image.value
+                }
+                //fetch
+
+                fetch('http://localhost:3000/character', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json'
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then(response => response.json())
+                    .then(characters => characters.forEach(character => {
+                        const card = document.createElement('div');
+                        const circle = document.createElement('div');
+                        const img = document.createElement('img');
+                        card.className = 'card';
+                        circle.className = 'circle';
+                        img.name = character.name;
+                        img.src = character.image;
+                        img.className = 'img';
+                        circle.appendChild(img);
+                        card.appendChild(circle);
+                        cards.append(card);
+                        addCharacterForm.hidden = true;
+                    }))
+
+            })
 
         }, 1000);
 
@@ -138,6 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
             box.style.animation = "";
             dottedLine.style.borderColor = '#bbb';
             marioGif.hidden = false;
+            lightsOut.hidden = true;
 
         }
 

@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
             //Here goes the code to add new Character
             addCharacterForm.addEventListener('submit', (e) => {
                 e.preventDefault();
+                document.location.reload();
 
                 //fetch
                 fetch('http://localhost:3000/character', {

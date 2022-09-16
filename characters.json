@@ -1,3 +1,10 @@
 {
-  "character": []
+  "character": [
+    {
+      "gameSeries": "aj",
+      "image": "aj",
+      "name": "aj",
+      "id": 1
+    }
+  ]
 }

@@ -48,7 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //Here we add the new character from the form into the
         // end of the array.
-        listOfCharactersReduced.push(listOfCharactersNew[0]);
+        for (let j = 0; j < listOfCharactersNew.length; j++) {
+            listOfCharactersReduced.push(listOfCharactersNew[j]);
+        }
 
         //Here we are going to iterate on each of the objects in the array
         //and display it on the website.
@@ -69,7 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //Here we are adding a Gif and wait 1 second so that i can be add at the end of the cards.
         setTimeout(() => {
-            const addCharacterForm = document.getElementById('#submit-button');
+            const addCharacterForm = document.getElementById('Add-Character');
+            const titleForm = document.querySelector('.container2');
             const card = document.createElement('div');
             const circle = document.createElement('div');
             const addGif = document.createElement('img');
@@ -84,22 +87,13 @@ document.addEventListener("DOMContentLoaded", () => {
             cards.append(card);
 
             addGif.addEventListener('click', () => {
-                const dotted2 = document.querySelector('.dotted2');
-                dotted2.hidden = true;
-                // addCharacterForm.hidden = false;
+                addCharacterForm.hidden = false;
+                titleForm.style.visibility = 'visible';
             });
 
             //Here goes the code to add new Character
-            addCharacterForm.addEventListener('click', (e) => {
+            addCharacterForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-
-                if (addCharacterForm.not(".checked")) {
-                    addCharacterForm.addClass("checked");
-                    setTimeout(function () {
-                        addCharacterForm.removeClass("checked");
-                    }, 8000);
-                }
-
 
                 //fetch
                 fetch('http://localhost:3000/character', {
@@ -131,7 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
         circle.forEach(element => {
 
             element.addEventListener('click', (e) => {
-                console.log(e.target.name)
+                const dotted2 = document.querySelector('.dotted2');
+                dotted2.hidden = false;
                 nameSeries.hidden = false;
                 characterName.hidden = false;
                 characterImage.hidden = false;
@@ -156,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
     toggle.addEventListener('click', () => {
         const box = document.querySelector('.container');
         const dottedLine = document.querySelector('.dotted');
+        const dottedLine2 = document.querySelector('.dotted2');
         const marioGif = document.querySelector('.mario-gif');
         const lightsOut = document.querySelector('.lights-out');
 
@@ -164,7 +160,8 @@ document.addEventListener("DOMContentLoaded", () => {
             document.body.style.color = 'white';
             document.querySelector('.logo').style.filter = 'invert(75%)';
             box.style.animation = "color-change 5s linear infinite";
-            dottedLine.style.borderColor = 'blue';
+            dottedLine.style.borderColor = 'green';
+            dottedLine2.style.borderColor = 'green';
             marioGif.hidden = true;
             lightsOut.hidden = false;
 
@@ -176,11 +173,10 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelector('.logo').style.filter = 'invert(0%)'
             box.style.animation = "";
             dottedLine.style.borderColor = '#bbb';
+            dottedLine2.style.borderColor = '#bbb';
             marioGif.hidden = false;
             lightsOut.hidden = true;
 
         }
     });
-
-
 });

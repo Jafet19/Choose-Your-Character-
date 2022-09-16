@@ -13,3 +13,6 @@ For this website:
 **3. The user will be able to add characters to the roster clicking the '+' on the roster.**
 
 **4. The user will be able to toggle a switch which will turn the background dark grey.**
+
+
+##### **by Jafet Reyes, Adriel Puello and Joshua Campos McGregor.**
